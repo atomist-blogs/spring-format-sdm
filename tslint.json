@@ -1,0 +1,38 @@
+{
+  "defaultSeverity": "error",
+  "extends": ["tslint:recommended"],
+  "jsRules": {},
+  "rules": {
+    "arrow-parens": [true, "ban-single-arg-parens"],
+    "await-promise": true,
+    "cyclomatic-complexity": true,
+    "deprecation": true,
+    "interface-name": [true, "never-prefix"],
+    "no-console": true,
+    "no-duplicate-imports": true,
+    "no-duplicate-switch-case": true,
+    "no-floating-promises": true,
+    "no-implicit-dependencies": [true, "dev"],
+    "no-import-side-effect": true,
+    "no-inferred-empty-object-type": true,
+    "no-invalid-template-strings": false,
+    "no-invalid-this": true,
+    "no-null-keyword": true,
+    "no-object-literal-type-assertion": true,
+    "no-parameter-reassignment": true,
+    "no-return-await": true,
+    "no-switch-case-fall-through": true,
+    "no-unnecessary-class": true,
+    "no-unnecessary-type-assertion": true,
+    "object-literal-sort-keys": false,
+    "prefer-readonly": true,
+    "typedef": [
+      true,
+      "call-signature",
+      "parameter",
+      "property-declaration",
+      "member-variable-declaration"
+    ]
+  },
+  "rulesDirectory": []
+}
