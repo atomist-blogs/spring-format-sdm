@@ -17,10 +17,16 @@
 import {
     SoftwareDeliveryMachine,
     SoftwareDeliveryMachineConfiguration,
+    onAnyPush,
+    Autofix,
 } from "@atomist/sdm";
 import {
     createSoftwareDeliveryMachine,
 } from "@atomist/sdm-core";
+
+import {
+    springFormat,
+} from "@atomist/sdm-pack-spring";
 
 /**
  * Initialize an sdm definition, and add functionality to it.
@@ -32,15 +38,15 @@ export function machine(
 ): SoftwareDeliveryMachine {
 
     const sdm = createSoftwareDeliveryMachine({
-        name: "Empty Seed Software Delivery Machine",
+        name: "Spring Format SDM",
         configuration,
     });
 
-    /*
-     * this is a good place to type
-    sdm.
-     * and see what the IDE suggests for after the dot
-     */
+    const autofixGoal = new Autofix()
+        .with(springFormat(configuration));
 
-    return sdm;
+    // On any push, perform autofixes, which will push to current branch
+    return sdm.withPushRules(
+        onAnyPush().setGoals(autofixGoal),
+    );
 }

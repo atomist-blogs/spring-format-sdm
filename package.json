@@ -23,7 +23,9 @@
   "dependencies": {
     "@atomist/automation-client": "1.0.0-RC.2",
     "@atomist/sdm": "1.0.0-RC.2",
-    "@atomist/sdm-core": "1.0.0-RC.2"
+    "@atomist/sdm-core": "1.0.0-RC.2",
+    "@atomist/sdm-pack-build": "^1.0.0-RC.2",
+    "@atomist/sdm-pack-spring": "https://r.atomist.com/2789271372"
   },
   "devDependencies": {
     "@atomist/sdm-local": "1.0.0-RC.2",
