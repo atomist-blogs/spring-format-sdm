@@ -37,6 +37,7 @@ export const configuration: Configuration = {
 
     sdm: {
         spring: {
+            // Update this to the path to your executable JAR wrapper
             formatJar: "/Users/rodjohnson/atomist/atomist/spring-format/target/spring-format-0.1.0-SNAPSHOT-jar-with-dependencies.jar",
         },
     },

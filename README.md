@@ -2,13 +2,18 @@
   <img src="https://images.atomist.com/sdm/SDM-Logo-Dark.png">
 </p>
 
-# @atomist-seeds/empty-sdm
+# spring-format SDM
 
-[![atomist sdm goals](http://badge.atomist.com/T29E48P34/atomist-seeds/empty-sdm/c796f715-67c3-48ae-8b7c-45c0fd31443f)](https://app.atomist.com/workspace/T29E48P34)
-[![npm version](https://img.shields.io/npm/v/@atomist-seeds/empty-sdm.svg)](https://www.npmjs.com/package/@atomist-seeds/empty-sdm)
+[Atomist][atomist] software delivery machine
+(SDM) that uses `spring-format` to autoformat Java code.
 
-The simplest possible [Atomist][atomist] software delivery machine
-(SDM).
+To get this running:
+
+0. If you don't already have it, install the Atomist CLI by typing `npm i -g @atomist/cli`. Please refer to the getting started guide at https://atomist.com/developer.html. 
+1. Clone the Atomist executable JAR wrapper for `spring-format` at https://github.com/atomist/spring-format and create the executable JAR by typing `mvn package`. The executable JAR will be created under `/target/` and its name will be of the form `spring-format-0.1.0-SNAPSHOT-jar-with-dependencies.jar`.
+2. Update `index.ts` in this project to specify the path on your system to the executable JAR wrapper created in step 1.
+3. Type `npm i` to install the dependencies of this project
+4. Start the SDM in local mode via `atomist start --local`.
 
 Software delivery machines enable you to control your delivery process
 in code.  Think of it as an API for your software delivery.  See the
