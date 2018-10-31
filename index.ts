@@ -27,7 +27,6 @@ const machineOptions: ConfigureOptions = {
      * you can list it here.
      */
     requiredConfigurationValues: [
-        "sdm.spring.formatJar" : "/Users/rodjohnson/atomist/atomist/spring-format/target/spring-format-0.1.0-SNAPSHOT-jar-with-dependencies.jar",
     ],
 };
 
@@ -35,6 +34,12 @@ const machineOptions: ConfigureOptions = {
  * The starting point for building an SDM is here!
  */
 export const configuration: Configuration = {
+
+    sdm: {
+        spring: {
+            formatJar: "/Users/rodjohnson/atomist/atomist/spring-format/target/spring-format-0.1.0-SNAPSHOT-jar-with-dependencies.jar",
+        },
+    },
     /**
      * To run in team mode, you'll need an Atomist workspace.
      * To run in local mode, you don't. This will be ignored.
