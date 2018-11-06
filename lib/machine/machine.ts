@@ -59,7 +59,7 @@ export function machine(
     const inspectGoal = withLegacyFiltering(
         new AutoCodeInspection()
             .with(checkstyleReviewerRegistration({
-                checkstylePath: "/Users/rodjohnson/sforzando-dev/idea-projects/sdm-pack-checkstyle/test/checkstyle-8.8-all.jar",
+                checkstylePath: `${process.cwd()}/bin/checkstyle-8.8-all.jar`,
             })).withListener({
                 name: "messager",
                 listener: async rii => {
