@@ -19,14 +19,25 @@ import {
     onAnyPush,
     SoftwareDeliveryMachine,
     SoftwareDeliveryMachineConfiguration,
+    AutoCodeInspection,
+    goals,
+    whenPushSatisfies,
 } from "@atomist/sdm";
 import {
     createSoftwareDeliveryMachine,
 } from "@atomist/sdm-core";
 
 import {
-    springFormat,
+    springFormat, IsJava,
 } from "@atomist/sdm-pack-spring";
+
+import {
+    withLegacyFiltering, legacyFiltering,
+} from "@atomist/sdm-pack-issue";
+
+import {
+checkstyleReviewerRegistration,
+} from "@atomist/sdm-pack-checkstyle";
 
 /**
  * Initialize an sdm definition, and add functionality to it.
@@ -45,8 +56,24 @@ export function machine(
     const autofixGoal = new Autofix()
         .with(springFormat(configuration));
 
+    const inspectGoal = withLegacyFiltering(
+        new AutoCodeInspection()
+            .with(checkstyleReviewerRegistration({
+                checkstylePath: "/Users/rodjohnson/sforzando-dev/idea-projects/sdm-pack-checkstyle/test/checkstyle-8.8-all.jar",
+            })).withListener({
+                name: "messager",
+                listener: async rii => {
+                    return rii.addressChannels(`There are ${rii.review.comments.length} issues`);
+                },
+            }),
+        );
+    const reviewGoals = goals("Inspect").plan(inspectGoal).after(autofixGoal);
+
+    sdm.addExtensionPacks(legacyFiltering({inspectGoal, autofixGoal}));
+
     // On any push, perform autofixes, which will push to current branch
     return sdm.withPushRules(
         onAnyPush().setGoals(autofixGoal),
+        whenPushSatisfies(IsJava).setGoals(reviewGoals),
     );
 }

@@ -22,10 +22,12 @@
   "types": "./index.d.ts",
   "dependencies": {
     "@atomist/automation-client": "1.0.0-RC.2",
-    "@atomist/sdm": "1.0.0-RC.2",
+    "@atomist/sdm": "https://registry.npmjs.org/@atomist/sdm/-/@atomist/sdm-1.0.0-master.20181105092518.tgz",
     "@atomist/sdm-core": "1.0.0-RC.2",
     "@atomist/sdm-pack-build": "^1.0.0-RC.2",
-    "@atomist/sdm-pack-spring": "https://r.atomist.com/2789271372"
+    "@atomist/sdm-pack-spring": "https://r.atomist.com/2789271372",
+    "@atomist/sdm-pack-checkstyle": "https://registry.npmjs.org/@atomist/sdm-pack-checkstyle/-/@atomist/sdm-pack-checkstyle-1.0.0-master.20181106135334.tgz",
+    "@atomist/sdm-pack-issue": "https://registry.npmjs.org/@atomist/sdm-pack-issue/-/@atomist/sdm-pack-issue-1.0.0-issue-filter.20181106185520.tgz"
   },
   "devDependencies": {
     "@atomist/sdm-local": "1.0.0-RC.2",
