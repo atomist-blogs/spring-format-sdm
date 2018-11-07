@@ -22,6 +22,8 @@ import {
     AutoCodeInspection,
     goals,
     whenPushSatisfies,
+    ReviewListener,
+    ReviewListenerRegistration,
 } from "@atomist/sdm";
 import {
     createSoftwareDeliveryMachine,
@@ -56,17 +58,19 @@ export function machine(
     const autofixGoal = new Autofix()
         .with(springFormat(configuration));
 
+    const checkstyleReviewer = checkstyleReviewerRegistration({
+        checkstylePath: `${process.cwd()}/bin/checkstyle-8.8-all.jar`,
+    });
+    const sendMessageToUsers: ReviewListenerRegistration = {
+        name: "messager",
+        listener: async rii => {
+            return rii.addressChannels(`There are ${rii.review.comments.length} issues`);
+        },
+    };
     const inspectGoal = withLegacyFiltering(
         new AutoCodeInspection()
-            .with(checkstyleReviewerRegistration({
-                checkstylePath: `${process.cwd()}/bin/checkstyle-8.8-all.jar`,
-            })).withListener({
-                name: "messager",
-                listener: async rii => {
-                    return rii.addressChannels(`There are ${rii.review.comments.length} issues`);
-                },
-            }),
-        );
+            .with(checkstyleReviewer)
+            .withListener(sendMessageToUsers));
     const reviewGoals = goals("Inspect").plan(inspectGoal).after(autofixGoal);
 
     sdm.addExtensionPacks(legacyFiltering({inspectGoal, autofixGoal}));
